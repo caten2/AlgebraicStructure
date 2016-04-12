@@ -15,10 +15,10 @@ print(a)
 print('')
 
 print('We draw an operation digraph for adding 2 in F_5.')
-operation_digraph(a,lambda x: x+2, render=True)
+operation_digraph(a,lambda x: x+2, render=True, size=200)
 
 print('We the create a complex for the addition operation.')
-elems = list(a.elements)
+elems = a.canonical_order
 f = OperationComplex(a,'+')
 print(f)
 print('')
@@ -26,7 +26,7 @@ print('')
 print('We print a flower starting with 1+1 with six sides up to its fourth layer.')
 print(f.grow_flower((elems[1],elems[1]),6,4))
 print('')
- 
+
 print('We print a spiral starting with 1+1 with six sides up to its fourth layer.')
 print(f.grow_spiral((elems[1],elems[1]),6,4))
 print('')
@@ -44,7 +44,7 @@ b = GroupStructure(DihedralGroup(4))
 print(b)
 print('')
 g = OperationComplex(b,'*')
-elems = list(b.elements)
+elems = b.canonical_order
 x = elems[2]
 y = elems[5]
 print('We will start our complexes with the product of {} and {}.'.format(x,y))
@@ -58,9 +58,10 @@ print('')
 print('Another way to avoid triangles overlapping is to separate them in 3-space.')
 print('This is illustrated in the following example, which can be imported into a 3d graphics program such as Blender.')
 g.render_flower((x,y),11,23,'3d_example',dimension=3,use_height=True,initial_colors=cols)
- 
+
 print('We can also display helical complexes.')
 print('Combining these with the \'flower\' constructions can produce interesting 3d objects.')
+elems = a.canonical_order
 f.render_flower((elems[1],elems[1]),6,4,'1+1_flower',dimension=3,initial_colors=cols)
 f.render_spiral((elems[1],elems[1]),6,4,'1+1_spiral',initial_colors=cols)
  

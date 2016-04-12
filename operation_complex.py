@@ -60,7 +60,7 @@ def operation_digraph(structure, operation, render=False, file_name='operation_d
     """
     A digraph corresponding to a unary operation.
 
-    Note that one might need to play with the `size` setting to get a decent image.
+    Note that one might need to play with the `order` setting to get a decent image.
 
     Args:
         structure (AlgebraicStructure): The algebraic structure used in the construction of the complex.
@@ -68,7 +68,7 @@ def operation_digraph(structure, operation, render=False, file_name='operation_d
         render (bool): Whether the digraph should be given as asymptote vector graphics source code.
         file_name (str): The name of the file generated is `render` is True.
         labels (bool): Whether to label elements in the asymptote source.
-        size (int): The size of the resulting image.
+        order (int): The order of the resulting image.
 
     Returns:
         Digraph: The corresponding operation digraph.
@@ -76,20 +76,20 @@ def operation_digraph(structure, operation, render=False, file_name='operation_d
 
     m = structure.action_matrix(operation)
     if render == True:
-        size = structure.order
+        order = structure.order
         file = open(file_name, 'w')
         file.write('size({});'.format(size) + '\n' +
                   'dotfactor=10;')
-        file.write('for(int i=0; i<{}; ++i){{'.format(size) + '\n' +
-                  'dot(dir(90-360/{}*i));}}'.format(size) + '\n')
+        file.write('for(int i=0; i<{}; ++i){{'.format(order) + '\n' +
+                  'dot(dir(90-360/{}*i));}}'.format(order) + '\n')
         elem_lis = structure.canonical_order
-        for i in range(size):
+        for i in range(order):
                 if labels:
-                    file.write('label(\"${}$\",1.2*dir(90-360/{}*{}));'.format(structure.element_names[elem_lis[i]], size, i) + '\n')
+                    file.write('label(\"${}$\",1.2*dir(90-360/{}*{}));'.format(structure.element_names[elem_lis[i]], order, i) + '\n')
                 if list(m[i]).index(1) == i:
-                        file.write('draw(dir(90-360/{0}*{1})..1.35*dir(90-360/{0}*{1})..cycle,MidArcArrow);'.format(size, i) + '\n')
+                        file.write('draw(dir(90-360/{0}*{1})..1.35*dir(90-360/{0}*{1})..cycle,MidArcArrow);'.format(order, i) + '\n')
                 else:
-                    file.write('draw(dir(90-360/{0}*{1})..dir(90-360/{0}*{2}),MidArrow);'.format(size, i, list(m[i]).index(1)) + '\n')
+                    file.write('draw(dir(90-360/{0}*{1})..dir(90-360/{0}*{2}),MidArrow);'.format(order, i, list(m[i]).index(1)) + '\n')
     return DiGraph(m)
 
 class OperationComplex:

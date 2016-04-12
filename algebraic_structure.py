@@ -5,7 +5,7 @@ Charlotte Aten (caten2@u.rochester.edu) 2016
 """
 
 import sage.all
-from sage.rings.finite_rings.finite_field_constructor import FiniteField
+from sage.rings.finite_rings.constructor import FiniteField
 from sage.rings.finite_rings.integer_mod_ring import Integers
 from sage.matrix.constructor import matrix
 from itertools import product
