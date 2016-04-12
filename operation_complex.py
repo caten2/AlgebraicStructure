@@ -381,10 +381,11 @@ def examine_structure(structure, operation_name, min_size=0, max_size=0):
         max_size (int): The maximum number of petals to place on a generated flower.
     """
 
+    n = structure.order
     if min_size == 0:
-        min_size = structure.order
+        min_size = n
     if max_size == 0:
-        max_size = structure.order
+        max_size = n
     elems = structure.canonical_order
     f = OperationComplex(structure, operation_name)
     for size in range(min_size,max_size+1):
@@ -393,4 +394,4 @@ def examine_structure(structure, operation_name, min_size=0, max_size=0):
                 x = elems[i]
                 y = elems[j]
                 if j>=i or structure.operations[operation_name](x,y) != structure.operations[operation_name](y,x):
-                    f.render_flower((x,y),size,size,'{}({}{}{})'.format(structure,operation_name,str(x),str(y)))
+                    f.render_flower((x,y),size,size,'{}({},{},{}) {} petals'.format(structure,operation_name,str(x),str(y),size))
